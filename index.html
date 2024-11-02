@@ -1,148 +1,160 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
+<!-- 
+    la tele por Alplox
+    https://github.com/Alplox/la-tele (v0.11)
+-->
 <head>
-    <meta charset="utf-8">
-    <title>Turis TV</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="author" content="Zhang Boheng">
-    <meta name="keywords" content="iptv, movie, github, online tv, web tv, series tv...">
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/index.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_blank">
+    <link rel="stylesheet" href="https://unpkg.com/modern-normalize@1.1.0/modern-normalize.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/video.js/dist/video.min.js"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#051320" />
+
+    <title>La tele</title>
+    <meta name="title" content="La tele">
+    <meta name="description" content="Canales de Chile a un toque.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alplox.github.io/la-tele/">
+    <meta property="og:title" content="La tele">
+    <meta property="og:description" content="Canales de Chile a un toque.">
+    <meta property="og:image" content="assets/img/Previews/shots_la_tele_v0-10.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://alplox.github.io/la-tele/">
+    <meta property="twitter:title" content="La tele">
+    <meta property="twitter:description" content="Canales de Chile a un toque.">
+    <meta property="twitter:image"
+        content="assets/img/Previews/shots_la_tele_v0-10.jpg">
+    <script type="module">
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+        const el = document.createElement('pwa-update');
+        el.swpath = "pwabuilder-sw.js"
+        el.updatemessage = "Nueva versión disponible";
+        el.offlineToastDuration = 2000;
+        document.body.appendChild(el);
+    </script>
+    <script src="https://unpkg.com/akar-icons-fonts"></script>
+    <script src="assets/js/main.js" type="module"></script>
 </head>
-<style>
-    body {
-        background-image: url("images/bg.jpg");
-        overflow-x: hidden;
-    }
-    
-    #languages,
-    #source {
-        width: 50%;
-        cursor: pointer;
-    }
-</style>
 
 <body>
-    <div id="mySidenav" class="sidenav">
-        <h3>Turis TV</h3>
-        <hr>
-        <div>
-            <span>Sensitive Content</span>
-            <label class="switch">
-            <input type="checkbox" id="adultban">
-            <span class="slider round"></span>
-            </label>
-        </div>
-        <div>
-            <span>Languages</span>
-            <select id="languages" name="languages">
-            </select>
-        </div>
-        <div>
-            <span>Clear</span>
-            <button class="cachebtn">All</button>
-        </div>
-        <div>
-            <span>Source</span>
-            <button class="cachebtn"><a href="#sourcebox" data-reveal-id="sourceitem">Control</a></button>
-        </div>
-        <div>
-            <span>Version</span>
-            <label class="switch" style="cursor: pointer;"><a href="#logbox" data-reveal-id="logboxitem" style="color:#fff">8.2.0</a></label>
-        </div>
-        <div>
-            <span>About</span>
-            <label class="switch" style="cursor: pointer;"><a href="#infobox" data-reveal-id="infoboxitem" style="color:#fff">APP</a></label>
-        </div>
-    </div>
-    <div id="main">
-        <span style="cursor:pointer"><img src="images/menuicon.png"></span>
-    </div>
-    <div id="popupbox">
-        <div id="chooseitem" class="reveal-modal">
-            <a href="#" class="close-reveal-modal">×</a>
-            <h2>Select</h2>
-            <div id="selectform">
-                <input type="radio" name="radioName" value="1" checked/> <span>Ulke</span> <br />
-                <input type="radio" name="radioName" value="2" /> <span>Dil</span> <br />
-                <input type="radio" name="radioName" value="3" /> <span>Kategori</span> <br />
-            </div>
-            <button class="stylebtn">Gi̇ri̇ş!</button>
-        </div>
-    </div>
-    <div id="sourcebox">
-        <div id="sourceitem" class="source-modal">
-            <a href="#" class="close-source-modal">×</a>
-            <h2>Select</h2>
-            <div id="selectform">
-                <input type="radio" name="sourceName" value="1" checked/> <span>Moive</span> <br />
-                <input type="radio" name="sourceName" value="2" /> <span>Novel</span> <br />
-                <input type="radio" name="sourceName" value="3" /> <span>Manga</span> <br />
-                <input type="radio" name="sourceName" value="4" /> <span>Music</span> <br />
-                <input type="radio" name="sourceName" value="5" /> <span>Porn</span> <br />
-            </div>
-            <button class="stylebtn" onclick="goToSource()"><img src="./images/nextselect.svg" style="width:30px;"></button>
-        </div>
-    </div>
-    <div id="logbox">
-        <div id="logboxitem" class="log-modal">
-            <a href="#" class="close-log-modal">×</a>
-            <div class="scrollidbar" style="text-align: left;">
-            </div>
-        </div>
-    </div>
-    <div id="infobox">
-        <div id="infoboxitem" class="log-modal">
-            <a href="#" class="close-log-modal">×</a>
-            <div class="scrollappbar" style="text-align: left;">
-                <p>App Will Publish 2022 or later.</p>
-                <p>Developer: Zhang Boheng</p>
-                <div class="circlescon" style="display:flex;">
-                    <li>
-                        <a target="_blank" href="https://github.com/zhangboheng/"><img src="images/github.svg"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="https://www.youtube.com/c/LuckyDesigner"><img src="images/youtube.svg"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="https://t.me/Luckydesignerspace"><img src="images/telegram.svg"></a>
-                    </li>
-                    <li>
-                        <img src="images/wechat.svg">
-                        <div class="qrcode">
-                            <img src="images/wechatpub.jpg" style="width:100%; height:auto" />
-                        </div>
-                    </li>
-                </div>
-                <p>Copyright 2019-2021 行运设计师 www.luckydesigner.space All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-    <div class="bodyCon08">
-        <div class="students">
-            <div id="four_flash">
-                <div class="flashBg">
-                    <ul class="mobile">
-                        <li>
-                            <img src="images/tv.svg" />
-                            <dd>
-                                <a href="#popupbox" data-reveal-id="chooseitem"><button class="stylebtn">Giriş Tikla</button></a>
-                            </dd>
-                            <p>Turis Tv...</p>
-                        </li>
+    <!-- Alerta javascript desactivado -->
+    <noscript>
+        <p>El sitio <b>no</b> funciona sin <b>JavaScript</b>.</p>
+        <p>Si lo has deshabilitado, por favor <b>vuelve a activarlo</b>.</p>
+    </noscript>
 
-              
-                
-           
-             
-                    </ul>
+    <!-- video y listado canales -->
+    <section class="wrapper-all">
+        <header class="header-principal"> 
+            <a href="./" target="_self" tabindex="0"><h1>La tele</h1></a>
+            <a href="https://alplox.github.io/teles/" rel="nofollow noreferrer noopener" target="_self" tabindex="0">
+                <img class="img-teles" src="https://alplox.github.io/teles/assets/favicon/favicon-16x16.png" alt="logo teles"> teles <i class="ai-link-out"></i>
+            </a>
+        </header>
+        <main class="main-grid">   
+            <div class="container-video sombra">
+                <div class="container-overlay d-none">
+                    <div class="overlay">
+                        <details class="dropdown-señales">
+                            <summary role="button" class="boton boton-accion boton-señales">
+                              Señales
+                            </summary>
+                            <ul id="lista-señales">
+                            </ul>
+                        </details>
+                        <a id="nombre-overlay" rel="nofollow noopener"></a>
+                        <button type="button" role="button" class="boton boton-overlay-quitar-señal" id="boton-overlay-quitar-señal" title="Quitar señal activa" tabindex="0">
+                            <i class="ai-cross"></i>
+                        </button>
+                    </div>
                 </div>
+                <button type="button" role="button" class="boton boton-alternar-visibilidad-overlay boton-accion sombra" id="boton-alternar-visibilidad-overlay" title="Nombre sobre transmisiones on/off" disabled>
+                    <span id="span-boton-alternar-visibilidad-overlay"><i class="ai-eye-closed"></i></span>
+                </button>
+                <div class="container-transmision" id="container-transmision"></div>
+                <div class="container-texto-detras-container-transmision">
+                <p id="texto-detras-container-transmision"> Bienvenid<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" 
+                    fill="none" stroke="currentColor" stroke-width=".7" 
+                    stroke-linecap="round" stroke-linejoin="round" 
+                    class="ai ai-CircleTriangleRight"><circle cx="12" cy="12" r="10"/>
+                    <path d="M16 12l-6-4v8l6-4z"/>
+                    </svg>
+                    </p> 
+                </div>
+            </div>
+            <aside class="container-botones-canales sombra">
+                <input class="filtro" id="filtro" type="search" title="Buscador" placeholder="Buscar canal" tabindex="0" lang="es">
+                <div class="flip-container" id="flip-container">
+                    <div class="flipper" id="flipper">
+                        <div class="lista-botones front" id="lista-botones"></div>
+                        <div class="lista-botones back" id="lista-botones-m3u8" tabindex="-1"></div>
+                    </div>
+                </div>
+                <button type="button" role="button" class="boton boton-accion" id="boton-alternar-lista-canales" title="Alternar entre lista IPTV">
+                    Alternar listado <i class="ai-arrow-forward-thick"></i>
+                </button>
+            </aside>
+        </main>
+        <footer class="footer">
+            <button type="button" role="button" id="boton-descargo-responsabilidad" class="boton boton-accion">Descargo de responsabilidad</button>
+            <a href="https://github.com/Alplox/la-tele" rel="nofollow noreferrer noopener">
+                Desarrollado por Alplox <i class="ai-link-out"></i>
+            </a>
+            <p>v0.11</p>
+        </footer>
+    </section>
+   
+    <!-- Modal -->
+    <div class="modal" id="modal-legal" tabindex="-1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span><i class="ai-cross" tabindex="0"></i></span>
+                <h1>Descargo de responsabilidad</h1>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>"la tele" es un proyecto de código abierto gratuito que permite gestionar canales de televisión
+                        de libre acceso por Internet.</li>
+                    <li>"la tele" no decodifica transmisiones. Los enlaces que figuran en este proyecto son procesados
+                        desde diferentes sitios públicos con libre distribución/acceso.</li>
+                    <li>"la tele" no posee ningún tipo de monetización, en consecuencia, no se lucra de ninguna forma o
+                        medio.</li>
+                    <li>El proyecto cuenta con reproductores multimedia, los que no corresponden a una retransmisión
+                        de los canales ni implica la decodificación de éstos.</li>
+                    <li>No se es propietario, ni responsable de ninguno de los contenidos emitidos por parte de cada
+                        canal.</li>
+                    <li>"la tele" no ofrece canales de pago bajo ninguna modalidad.</li>
+                    <li>En este proyecto no se almacena ninguna transmisión.</li>
+                    <li>El proyecto tanto como sus mantenedores no asumen responsabilidad alguna respecto a los
+                        derechos de propiedad
+                        intelectual que se vean infringidos por un tercero o por cualquier usuario.</li>
+                    <li>El usuario por defecto tiene la capacidad de dirigirse al sitio oficial de cada transmisión
+                        en todo
+                        momento.</li>
+                    <li>Si posees los derechos de algún canal y deseas que sea retirado, <a
+                            href="https://github.com/Alplox/json-teles/issues" rel="nofollow noreferrer"> contáctame <i class="ai-link-out"></i></a>.
+                    </li>
+                </ul>
+                <p>&mdash; Si quieres conocer el origen de cada livestream visita el <a
+                    href="https://github.com/Alplox/la-tele#listado-canales-disponibles-junto-a-su-fuente"
+                    rel="noopener nofollow noreferrer">repositorio
+                    GitHub <i class="ai-github-fill"></i><i class="ai-link-out"></i></a> de la página.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" role="button" class="boton boton-modal-entendido sombra"
+                id="boton-modal-entendido">Entendido</button>
             </div>
         </div>
     </div>
-    <script src="js/translator.js"></script>
 </body>
-
 </html>
